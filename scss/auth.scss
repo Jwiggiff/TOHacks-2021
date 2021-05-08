@@ -1,0 +1,59 @@
+.login {
+  height: 100%;
+
+  h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 1.5em 0 3em 0;
+  }
+}
+
+.register {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+
+  .progress {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  > section {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .prev, .next {
+      text-decoration: none;
+      font-size: 5em;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .prev {
+      left: 4rem;
+    }
+    .next {
+      right: 4rem;
+    }
+  }
+
+  h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 1.5em;
+  }
+}
+
+#registerForm, #loginForm {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 4rem;
+
+  input {
+    font-size: 1.5em;
+  }
+}

@@ -41,6 +41,13 @@ app.get("/dashboard", ensureLogin, function (req, res) {
   res.render("dashboard");
 });
 
+app.get("/login", function (req, res) {
+  res.render("login");
+});
+app.get("/register", function (req, res) {
+  res.render("register");
+});
+
 
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));

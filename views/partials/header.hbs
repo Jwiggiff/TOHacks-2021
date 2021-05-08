@@ -1,8 +1,10 @@
 <header class="site-header">
   <a href="/" class="site-title">Title</a>
   <nav class="site-nav">
+  {{#if user}}
     <a href="/dashboard/" class="nav-link">Dashboard</a>
     <a href="/explore/" class="nav-link">Explore</a>
+  {{/if}}
   </nav>
   <a href="/login" class="btn">Login</a>
 </header>

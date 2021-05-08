@@ -8,14 +8,15 @@
   color: $black;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   background-color: $white;
-
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
 }
 
 h1,
@@ -26,3 +27,5 @@ h3 {
 
 @import "./components";
 @import "./header";
+@import "./landing";
+@import "./auth";
