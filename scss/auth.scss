@@ -47,7 +47,7 @@
   }
 }
 
-#registerForm, #loginForm {
+#loginForm, .form-wrapper {
   display: flex;
   flex-flow: column;
   align-items: center;
