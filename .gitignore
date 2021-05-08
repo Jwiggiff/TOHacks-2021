@@ -1,4 +1,9 @@
-.sass-cache
+logs
+*.log
+npm-debug.log*
+
+node_modules/
+.sass-cache/
 
 styles.css
 styles.css.map
