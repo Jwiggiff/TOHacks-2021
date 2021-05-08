@@ -61,28 +61,27 @@ const user = {
 };
 
 app.post("/login", (req, res) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
-  if(username === "" || password === "") {
+  if(email === "" || password === "") {
     // Render 'missing credentials'
     return res.render("login", { errorMsg: "Missing credentials."});
   }
 
   // use sample "user" (declared above)
-  if(username === user.username && password === user.password){
+  if(email === user.email && password === user.password){
 
     console.log("we in")
     // Add the user on the session and redirect them to the dashboard page.
     req.session.user = {
-      username: user.username,
       email: user.email
     };
 
     res.redirect("/dashboard");
   } else {
     // render 'invalid username or password'
-    res.render("login", { errorMsg: "invalid username or password!"});
+    res.render("login", { errorMsg: "invalid email or password!"});
   }
 });
 

@@ -1,7 +1,7 @@
 <div class="login">
   <h1>Enter Your Info</h1>
   <form method="post" action="/login" id="registerForm">
-    <input type="text" name="username" placeholder="USername">
+    <input type="text" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Password">
     {{#if errorMsg}}
         <div class="alert alert-danger"><strong>Error:</strong> {{errorMsg}}</div>
