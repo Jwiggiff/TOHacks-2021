@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Jwiggiff/TOHacks-2021#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sass": "^1.32.12"
   }
 }
