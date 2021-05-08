@@ -1,8 +1,12 @@
 <div class="login">
   <h1>Enter Your Info</h1>
-  <form action="" id="registerForm">
-    <input type="text" name="email" placeholder="Email">
+  <form method="post" action="/login" id="registerForm">
+    <input type="text" name="username" placeholder="USername">
     <input type="password" name="password" placeholder="Password">
+    {{#if errorMsg}}
+        <div class="alert alert-danger"><strong>Error:</strong> {{errorMsg}}</div>
+    {{/if}}
+    <button class="btn">Login</button>
 
     <p>Don't have an Account? <a href="/register">Create one here!</a></p>
   </form>
