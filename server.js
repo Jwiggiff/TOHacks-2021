@@ -45,7 +45,47 @@ app.get("/dashboard", ensureLogin, function (req, res) {
   res.render("dashboard");
 });
 
+app.get("/login", (req,res)=> {
+  res.render("login")
+})
 
+//login test hardcoded
+
+const user = {
+  username: "sampleuser",
+  password: "samplepassword",
+  email: "sampleuser@example.com"
+};
+
+app.post("/login", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  if(username === "" || password === "") {
+    // Render 'missing credentials'
+    return res.render("login", { errorMsg: "Missing credentials.", layout: false });
+  }
+
+  // use sample "user" (declared above)
+  if(username === user.username && password === user.password){
+
+    // Add the user on the session and redirect them to the dashboard page.
+    req.session.user = {
+      username: user.username,
+      email: user.email
+    };
+
+    res.redirect("/dashboard");
+  } else {
+    // render 'invalid username or password'
+    res.render("login", { errorMsg: "invalid username or password!", layout: false});
+  }
+});
+
+app.get("/logout", function(req, res) {
+  req.session.reset();
+  res.redirect("/login");
+});
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
 
