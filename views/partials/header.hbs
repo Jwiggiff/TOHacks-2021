@@ -1,8 +1,12 @@
 <header class="site-header">
   <a href="/" class="site-title">Title</a>
-  <nav class="site-nav">
+  {{#if session.user}}
+    <nav class="site-nav">
     <a href="/dashboard/" class="nav-link">Dashboard</a>
     <a href="/explore/" class="nav-link">Explore</a>
-  </nav>
-  <a href="/login" class="btn">Login</a>
+    </nav>
+  {{else}}
+    <a href="/register" class="btn btn-success"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Register</a>
+    <a href="/login" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;&nbsp;Log In</a>
+  {{/if}}
 </header>

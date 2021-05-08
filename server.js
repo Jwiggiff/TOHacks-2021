@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 var path = require("path");
+var dataServicesAuth = require("./data-services-auth")
+var dataService = require("./data-service")
+
+
 
 const exphbs = require("express-handlebars");
 const sessions = require("client-sessions");
