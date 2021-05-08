@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
 function ensureLogin(req, res, next) {
   if (!req.session.user) {
     // Not logged in
-    res.redirect("/");
+    res.redirect("/login");
   } else {
     next();
   }
@@ -71,8 +71,6 @@ app.post("/login", (req, res) => {
 
   // use sample "user" (declared above)
   if(email === user.email && password === user.password){
-
-    console.log("we in")
     // Add the user on the session and redirect them to the dashboard page.
     req.session.user = {
       email: user.email
