@@ -1,16 +1,10 @@
-//set up schemas here
-
-const e = require("express");
-
-// need these functions. Note: use promises to resolve() and reject() when returning.
-
+const { Pool } = require("pg");
 let pool;
+
 module.exports = {
     initialize: function(){
         //initializing functions. e.g. create connection, create model etc.
         return new Promise((resolve,reject) => {
-            const { Pool } = require("pg");
-
             const config = {
                 user: "om",
                 password: "TnMfK5w8C9tnMb6L",
@@ -27,15 +21,10 @@ module.exports = {
     },
 
     checkUser: function(userData){
-        // authenticates user
-
         var user_exists = false;
 
         email_address = userData[email];
         user_password = userData[password];
-        // const query = (
-        //     `SELECT COUNT(*) FROM data.users WHERE email = ${email_address};`
-        // );
 
         const query = `
             SELECT email, password

@@ -60,8 +60,6 @@ app.get("/login", ensureLoggedOut, function (req, res) {
   });
 });
 
-
-
 app.get("/register", function (req, res) {
   res.render("register");
 });
