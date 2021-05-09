@@ -16,7 +16,7 @@ app.use(
   sessions({
     cookieName: "session",
     secret: "JohnCena",
-    duration: 2 * 60 * 1000,
+    duration: 7 * 24 * 60 * 60 * 1000,
     activeDuration: 1000 * 60,
   })
 );
