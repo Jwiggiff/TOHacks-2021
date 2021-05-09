@@ -6,5 +6,28 @@
     <a href="/explore/" class="nav-link">Explore</a>
   {{/if}}
   </nav>
+  {{#if session.user}}
+    <input type="checkbox" id="dropdown" hidden />
+  <label for="dropdown">
+    <div>
+      <p>Bob Ross</p>
+      <p>Level 3 Trainer</p>
+    </div>
+    <span class="profileBtn">
+      <img src="/assets/profile.png" alt="Profile">
+    </span>
+    <span class="material-icons">expand_more</span>
+  </label>
+  <ul class="dropdown">
+    <li>
+      <a href="/settings">User Settings</a>
+    </li>
+    <hr>
+    <li>
+      <a id="signOutBtn" href="/logout">Sign Out</a>
+    </li>
+  </ul>
+  {{else}}
   <a href="/login" class="btn">Login</a>
+  {{/if}}
 </header>

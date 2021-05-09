@@ -53,6 +53,10 @@ app.get("/login", function (req, res) {
 app.get("/register", function (req, res) {
   res.render("register");
 });
+app.get("/logout", function(req, res) {
+  req.session.reset();
+  res.redirect('/');
+});
 
 //login test hardcoded
 
