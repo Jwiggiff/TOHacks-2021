@@ -1,6 +1,7 @@
 .site-header {
   width: 100%;
   min-height: 80px;
+  max-height: 80px;
   padding: 0 2rem;
   background-color: $teal;
   display: flex;
@@ -8,6 +9,24 @@
   align-items: center;
   z-index: 10;
   position: relative;
+}
+
+.site-title {
+  height: 100%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $title-font;
+  font-size: 2em;
+  text-decoration: none;
+  color: $white;
+
+  img {
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .site-nav {
