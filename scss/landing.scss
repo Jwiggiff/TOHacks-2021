@@ -1,3 +1,24 @@
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadein-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .landing {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,6 +35,8 @@
   .right {
     display: grid;
     place-items: center;
+    opacity: 0;
+    animation: fadein 0.5s 0.25s ease-out forwards;
 
     img {
       width: 100%;
@@ -26,6 +49,7 @@
     font-size: 3.5em;
     font-weight: bold;
     line-height: 1;
+    animation: fadein 0.5s ease-out;
 
     &::before {
       content: "";
@@ -70,6 +94,17 @@
     h3 {
       font-size: 3em;
       font-weight: bold;
+    }
+
+    li {
+      opacity: 0;
+      animation: fadein-bottom 0.5s ease-out forwards;
+
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.25s;
+        }
+      }
     }
 
     li:nth-child(2) h3 {
