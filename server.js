@@ -1,16 +1,10 @@
 const express = require("express");
 const app = express();
 var path = require("path");
-<<<<<<< HEAD
 var dataServicesAuth = require("./data-services-auth")
 var dataService = require("./data-service")
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }));
-=======
-var dataServicesAuth = require("./data-services-auth");
-var dataService = require("./data-service");
-app.use(express.urlencoded({ extended: false }));
->>>>>>> 7bbb9f984edd40da44887a294706f8661b7cb0ee
 
 const exphbs = require("express-handlebars");
 const sessions = require("client-sessions");
@@ -71,12 +65,8 @@ app.get("/login", ensureLoggedOut, function (req, res) {
 app.get("/register", function (req, res) {
   res.render("register");
 });
-<<<<<<< HEAD
 
 app.get("/logout", function(req, res) {
-=======
-app.get("/logout", function (req, res) {
->>>>>>> 7bbb9f984edd40da44887a294706f8661b7cb0ee
   req.session.reset();
   res.redirect("/");
 });
@@ -135,7 +125,6 @@ app.post("/login", (req, res) => {
 // initialize ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.use(express.static("public"));
 
-<<<<<<< HEAD
 dataServicesAuth.initialize()
 .then(function(msg) {
     console.log(msg);
@@ -144,13 +133,6 @@ dataServicesAuth.initialize()
 .catch(function(err) {
     console.log(err);
 });
-=======
-app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
-
-function onHttpStart() {
-  console.log("Express http server listening on: " + HTTP_PORT);
-}
->>>>>>> 7bbb9f984edd40da44887a294706f8661b7cb0ee
 
 app.use(function (req, res) {
   res.status(404).send("Page Not Found");
