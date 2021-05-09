@@ -197,31 +197,35 @@ module.exports = {
         });
     },
     bestCurrStreaks: function() {
-        pool.query("SELECT * FROM data.users ORDER BY day_streak_count DESC;", (err, res) => {
-            if (err) {
-                console.log('Something went wrong.');
-                console.log(err);
-            } else {
-                let ans = [];
-                res.rows.forEach((row) => {
-                    ans.push(row);
-                });
-                return ans;
-            }
-        });
+        return new Promise((resolve,reject) => {
+            pool.query("SELECT * FROM data.users ORDER BY day_streak_count DESC;", (err, res) => {
+                if (err) {
+                    console.log('Something went wrong.');
+                    console.error(err);
+                } else {
+                    let ans = [];
+                    res.rows.forEach((row) => {
+                        ans.push(row);
+                    });
+                    resolve(ans);
+                }
+            });
+        })
     },
     bestHighestStreaks: function() {
-        pool.query("SELECT * FROM data.users ORDER BY highest_streak DESC;", (err, res) => {
-            if (err) {
-                console.log('Something went wrong.');
-                console.log(err);
-            } else {
-                let ans = [];
-                res.rows.forEach((row) => {
-                    ans.push(row);
-                });
-                return ans;
-            }
-        });
+        return new Promise((resolve,reject) => {
+            pool.query("SELECT * FROM data.users ORDER BY highest_streak DESC;", (err, res) => {
+                if (err) {
+                    console.log('Something went wrong.');
+                    console.error(err);
+                } else {
+                    let ans = [];
+                    res.rows.forEach((row) => {
+                        ans.push(row);
+                    });
+                    resolve(ans);
+                }
+            });
+        })
     }
 }
