@@ -106,6 +106,7 @@ label[for="dropdown"] {
 
   .material-icons {
     color: $white;
+    transition: transform 0.2s ease;
   }
 }
 
@@ -127,6 +128,10 @@ label[for="dropdown"] {
       color: black;
     }
   }
+}
+
+#dropdown:checked + label .material-icons {
+  transform: rotate(180deg);
 }
 
 #dropdown:checked ~ .dropdown {

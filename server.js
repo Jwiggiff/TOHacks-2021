@@ -58,6 +58,10 @@ app.get("/logout", function(req, res) {
   res.redirect('/');
 });
 
+app.get("/explore", function(req, res) {
+  res.render("explore");
+});
+
 //login test hardcoded
 
 const user = {
