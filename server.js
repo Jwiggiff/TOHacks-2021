@@ -111,6 +111,10 @@ app.get("/settings", function (req, res) {
   res.render("settings");
 });
 
+app.get("/interact", function (req, res) {
+  res.render("interact");
+});
+
 
 // POST Methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
