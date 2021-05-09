@@ -176,18 +176,20 @@ module.exports = {
         });
     },
     getAnimalbyID: function(id) {
-        pool.query(`SELECT * FROM data.animals WHERE id='${id}';`, (err, res) => {
-            if (err) {
-                console.log ('Something went wrong. Please ensure a valid animal UUID is provided.');
-                console.log (err);
-            } else {
-                let ans;
-                res.rows.forEach((row) => {
-                    ans = row;
-                });
-                return ans;
-            }
-        });
+        return new Promise((resolve,reject) => {
+            pool.query(`SELECT * FROM data.animals WHERE id='${id}';`, (err, res) => {
+                if (err) {
+                    console.log ('Something went wrong. Please ensure a valid animal UUID is provided.');
+                    console.log (err);
+                } else {
+                    let ans;
+                    res.rows.forEach((row) => {
+                        ans = row;
+                    });
+                    return ans;
+                }
+            });
+        });   
     },
     //TODO: make a function for assign an adopter to an animal and assigning pet to human
     assignAnimal: function(email, type) {
