@@ -27,6 +27,9 @@ app.engine(".hbs", exphbs({
           </li>
         `;
       }).join('');
+    },
+    addOne: (num) => {
+      return parseInt(num)+1;
     }
   }
 }));

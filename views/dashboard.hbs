@@ -18,8 +18,10 @@
       <div class="card__stat">{{session.user.level}}</div>
     </div>
   </div>
-  <div class="progress-bar" style="--percentage: {{pointsToPercentage session.user.points}}%">
+  <div class="progress-bar" style="--percentage: {{pointsToPercentage session.user.points}}%; --level: {{session.user.level}}">
     <span class="progress"></span>
+    <span class="l-label">Level {{session.user.level}}</span>
+    <spa class="r-label">Level {{addOne session.user.level}}</spa>
   </div>
   <div class="btn-container">
     <form method="post" action="/increment">
