@@ -17,6 +17,16 @@ app.engine(".hbs", exphbs({
     },
     pointsToPercentage: (points) => {
       return (points / 100) * 100;
+    },
+    generateLeaderboard: (leaderboard, field) => {
+      return leaderboard.map((user) => {
+        return `
+          <li class="user">
+            <span class="user__name">${user.fname} ${user.lname}</span>
+            <span class="user__score">${user[field]}</span>
+          </li>
+        `;
+      }).join('');
     }
   }
 }));
@@ -83,8 +93,11 @@ app.get("/logout", function(req, res) {
   res.redirect("/");
 });
 
-app.get("/explore", function (req, res) {
-  res.render("explore");
+app.get("/explore", async function (req, res) {
+  res.render("explore", {
+    currStreaks: await dataServicesAuth.bestCurrStreaks(),
+    highStreaks: await dataServicesAuth.bestHighestStreaks()
+  });
 });
 
 app.get("/rewards", function (req, res) {
