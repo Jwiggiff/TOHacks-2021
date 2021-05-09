@@ -3,22 +3,22 @@
   <div class="cards">
     <div class="card">
       <div class="card__title">Previous Best</div>
-      <div class="card__stat"><span id="prev_best">60</span> Days</div>
+      <div class="card__stat">{{session.user.highest_streak}} Days</div>
     </div>
     <div class="card">
       <div class="card__title">Current Streak</div>
-      <div class="card__stat"><span id="cur_streak">16</span> Days</div>
+      <div class="card__stat">{{session.user.day_streak_count}} Days</div>
     </div>
     <div class="card">
       <div class="card__title">Challenges Completed</div>
-      <div class="card__stat"><span id="challenges">5</span></div>
+      <div class="card__stat">{{pointsToChallenges session.user.points}}</div>
     </div>
     <div class="card">
       <div class="card__title">Level</div>
-      <div class="card__stat"><span id="level">10</span></div>
+      <div class="card__stat">{{session.user.level}}</div>
     </div>
   </div>
-  <div class="progress-bar">
+  <div class="progress-bar" style="--percentage: {{pointsToPercentage session.user.points}}%">
     <span class="progress"></span>
   </div>
   <div class="btn-container">

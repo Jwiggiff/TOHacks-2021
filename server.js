@@ -8,7 +8,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const exphbs = require("express-handlebars");
 const sessions = require("client-sessions");
 
-app.engine(".hbs", exphbs({ extname: ".hbs", defaultLayout: "default" }));
+app.engine(".hbs", exphbs({
+  extname: ".hbs",
+  defaultLayout: "default",
+  helpers: {
+    pointsToChallenges: (points) => {
+      return Math.floor(points / 50);
+    },
+    pointsToPercentage: (points) => {
+      return (points % 100);
+    }
+  }
+}));
 app.set("view engine", ".hbs");
 
 app.use(
@@ -22,7 +33,7 @@ app.use(
 
 app.use(async function (req, res, next) {
   res.locals.session = {
-    user: await dataServicesAuth.getUser("omupatel2003@gmail.com"),
+    user: await dataServicesAuth.getUser(req.session.user.email),
   };
   next();
 });

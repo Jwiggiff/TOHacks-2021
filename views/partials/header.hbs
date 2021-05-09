@@ -13,8 +13,8 @@
     <input type="checkbox" id="dropdown" hidden />
   <label for="dropdown">
     <div>
-      <p>Bob Ross</p>
-      <p>Level 3</p>
+      <p>{{session.user.fname}} {{session.user.lname}}</p>
+      <p>Level {{session.user.level}}</p>
     </div>
     <span class="profileBtn">
       <img src="/assets/profile.png" alt="Profile">
