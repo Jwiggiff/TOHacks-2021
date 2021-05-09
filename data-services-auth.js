@@ -250,7 +250,7 @@ module.exports = {
                     console.error(err);
                 } else {
                     let ans = [];
-                    res.rows.forEach((row) => {
+                    res.rows.forEach(async (row) => {
                         row.adopt = await this.getAnimalbyID(row.adopt);
                         ans.push(row);
                     });
@@ -267,7 +267,7 @@ module.exports = {
                     console.error(err);
                 } else {
                     let ans = [];
-                    res.rows.forEach((row) => {
+                    res.rows.forEach(async (row) => {
                         row.adopt = await this.getAnimalbyID(row.adopt);
                         ans.push(row);
                     });
