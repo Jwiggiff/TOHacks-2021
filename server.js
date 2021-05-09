@@ -32,9 +32,10 @@ app.use(
 );
 
 app.use(async function (req, res, next) {
-  res.locals.session = {
-    user: await dataServicesAuth.getUser(req.session.user.email),
-  };
+  if(req.session.user)
+    res.locals.session = {
+      user: await dataServicesAuth.getUser(req.session.user.email),
+    };
   next();
 });
 
