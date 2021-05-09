@@ -20,8 +20,10 @@ app.use(
   })
 );
 
-app.use(function (req, res, next) {
-  res.locals.session = req.session;
+app.use(async function (req, res, next) {
+  res.locals.session = {
+    user: await dataServicesAuth.getUser("omupatel2003@gmail.com"),
+  };
   next();
 });
 
