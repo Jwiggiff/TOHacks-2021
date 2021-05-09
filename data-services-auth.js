@@ -195,5 +195,33 @@ module.exports = {
                 console.log(err);
             }
         });
+    },
+    bestCurrStreaks: function() {
+        pool.query("SELECT * FROM data.users ORDER BY day_streak_count DESC;", (err, res) => {
+            if (err) {
+                console.log('Something went wrong.');
+                console.log(err);
+            } else {
+                let ans = [];
+                res.rows.forEach((row) => {
+                    ans.push(row);
+                });
+                return ans;
+            }
+        });
+    },
+    bestHighestStreaks: function() {
+        pool.query("SELECT * FROM data.users ORDER BY highest_streak DESC;", (err, res) => {
+            if (err) {
+                console.log('Something went wrong.');
+                console.log(err);
+            } else {
+                let ans = [];
+                res.rows.forEach((row) => {
+                    ans.push(row);
+                });
+                return ans;
+            }
+        });
     }
 }
