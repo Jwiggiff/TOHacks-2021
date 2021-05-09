@@ -129,7 +129,7 @@ module.exports = {
             });
         })
     },
-    registerUser: function(userData){
+    registerUser: function(userData, type){
         return new Promise((resolve,reject)=>{
             pool.query(`INSERT INTO data.users VALUES (default, '${userData.fname}', '${userData.lname}', '${userData.email}', '${userData.password}', 0, 0, 1, NULL, NULL, NULL, 0, NULL);`, (err, res) => {
                 if (err) {
@@ -137,7 +137,8 @@ module.exports = {
                     console.error(err);
                 }
                 resolve("user has been added correctly");
-            })
+            });
+            assignAnimal(userData.email, type);
         })
     },
     //return list of animal objects of a certain type: dog, cat, bug, fish
@@ -188,13 +189,38 @@ module.exports = {
         });
     },
     //TODO: make a function for assign an adopter to an animal and assigning pet to human
-    assignAnimal: function(email, animal_id) {
-        pool.query(`UPDATE data.users SET adopt='${animal_id}' WHERE email='${email}';`, (err, res) => {
-            if (err) {
-                console.log('Something went wrong. Please ensure valid user email and animal UUID are provided.');
-                console.log(err);
-            }
-        });
+    assignAnimal: function(email, type) {
+        if (type==='dog') {
+            pool.query(`UPDATE data.users SET adopt='0dd2d896-f315-4ca2-8a7d-0ca0e99fa2ee' WHERE email='${email}';`, (err, res) => {
+                if (err) {
+                    console.log('Something went wrong. Please ensure a valid user email is provided.');
+                    console.log(err);
+                }
+            });
+        } else if (type==='cat') {
+            pool.query(`UPDATE data.users SET adopt='2f0db17e-1a50-4854-9430-1d3bcfb7873d' WHERE email='${email}';`, (err, res) => {
+                if (err) {
+                    console.log('Something went wrong. Please ensure a valid user email is provided.');
+                    console.log(err);
+                }
+            });
+        } else if (type==='fish') {
+            pool.query(`UPDATE data.users SET adopt='0248d9b6-9b3f-440f-acf0-710752f199d8' WHERE email='${email}';`, (err, res) => {
+                if (err) {
+                    console.log('Something went wrong. Please ensure a valid user email is provided.');
+                    console.log(err);
+                }
+            });
+        } else if (type==='bug') {
+            pool.query(`UPDATE data.users SET adopt='738ee61c-bd96-4b9f-a6e3-420fc1a1bc0d' WHERE email='${email}';`, (err, res) => {
+                if (err) {
+                    console.log('Something went wrong. Please ensure a valid user email is provided.');
+                    console.log(err);
+                }
+            });
+        } else {
+            console.log('Something went wrong.');
+        }
     },
     bestCurrStreaks: function() {
         return new Promise((resolve,reject) => {
