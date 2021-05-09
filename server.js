@@ -99,7 +99,7 @@ app.get("/settings", function (req, res) {
 
 app.post("/register", function(req, res) {
   dataServicesAuth.registerUser(req.body)
-  .then(() => res.render('login', { errorMsg: "User created!"}))
+  .then(() => res.render('login', { Msg: "User created!"}))
   .catch((err) => res.render('register', { errorMsg: err, userName: req.body.userName }));
 });
 

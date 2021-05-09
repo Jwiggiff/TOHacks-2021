@@ -37,7 +37,7 @@ module.exports = {
                 if (err) {
                     reject(err);
                 }
-                if (res.rowCount = 1) {
+                if (res.rowCount == 1) {
                     resolve('Successfully authenticated');
                 } else {
                     resolve('Invalid email or password');
