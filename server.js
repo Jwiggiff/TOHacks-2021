@@ -32,6 +32,7 @@ app.use(
 );
 
 app.use(async function (req, res, next) {
+  console.log(req.session)
   if(req.session.user)
     res.locals.session = {
       user: await dataServicesAuth.getUser(req.session.user.email),
@@ -106,7 +107,7 @@ app.post("/register", function(req, res) {
 app.post("/login", function(req,res) {
   dataServicesAuth.checkUser(req.body)
   .then(function(user){
-    req.session.user ={
+    req.session.user = { 
       email: user.email
     }
     res.redirect('/dashboard');
