@@ -1,0 +1,32 @@
+.rewards {
+  height: 100%;
+
+  h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 1.5em 0 2em 0;
+  }
+
+  .display {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2rem;
+    padding: 0 12rem;
+
+    img {
+      width: 100%;
+    }
+
+    .btn {
+      flex: 1;
+      padding-bottom: 2rem;
+      max-width: 300px;
+      text-align: center;
+
+      h4 {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
+  }
+}
