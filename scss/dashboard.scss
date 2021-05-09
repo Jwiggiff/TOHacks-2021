@@ -46,8 +46,8 @@
       transition: width 0.2s ease;
     }
 
-    &::before {
-      content: "Level 10";
+    .l-label {
+      // content: Level calc(var(--level)-1);
       position: absolute;
       top: 100%;
       left: 0;
@@ -56,8 +56,8 @@
       font-weight: bold;
     }
 
-    &::after {
-      content: "Level 11";
+    .r-label {
+      // content: Level calc(var(--level)+1);
       position: absolute;
       top: 100%;
       right: 0;
