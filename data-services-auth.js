@@ -192,7 +192,6 @@ module.exports = {
     //TODO: make a function for assign an adopter to an animal and assigning pet to human
     assignAnimal: function(email, type) {
         if (type=='dog') {
-            console.log('dog');
             pool.query(`UPDATE data.users SET adopt='0dd2d896-f315-4ca2-8a7d-0ca0e99fa2ee' WHERE email='${email}';`, (err, res) => {
                 if (err) {
                     console.log('Something went wrong. Please ensure a valid user email is provided.');
