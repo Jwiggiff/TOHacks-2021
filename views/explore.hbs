@@ -1,22 +1,13 @@
 <section class="explore">
-  <div class="top-week">
-    <h1>Top Users This Week</h1>
-    <ul class="leaderboard-list">
-      <li class="header user">
-        <span class="user__name">Name</span>
-        <span class="user__score">Current Streak</span>
-      </li>
-      {{{generateLeaderboard currStreaks 'day_streak_count'}}}
-    </ul>
-  </div>
-  <div class="top-all-time">
-    <h1>Top Users of All Time</h1>
-    <ul class="leaderboard-list">
-      <li class="header user">
-        <span class="user__name">Name</span>
-        <span class="user__score">Best Streak</span>
-      </li>
-      {{{generateLeaderboard highStreaks 'highest_streak'}}}
-    </ul>
-  </div>
+  <h1>Leaderboard</h1>
+
+  <ul class="leaderboard-list">
+    <li class="header">
+      <span>Rank</span>
+      <span class="user__name">Name</span>
+      <a href="?sort=1" class="user__current {{#unless highestSort}}active{{/unless}}">Current Streak</a>
+      <a href="?sort=0" class="user__highest {{#if highestSort}}active{{/if}}">Highest Streak</a>
+    </li>
+    {{{generateLeaderboard leaderboard}}}
+  </ul>
 </section>

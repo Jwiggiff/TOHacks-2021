@@ -18,12 +18,13 @@ app.engine(".hbs", exphbs({
     pointsToPercentage: (points) => {
       return (points / 100) * 100;
     },
-    generateLeaderboard: (leaderboard, field) => {
+    generateLeaderboard: (leaderboard) => {
       return leaderboard.map((user) => {
         return `
           <li class="user">
             <span class="user__name">${user.fname} ${user.lname}</span>
-            <span class="user__score">${user[field]}</span>
+            <span class="user__current">${user.day_streak_count}</span>
+            <span class="user__highest">${user.highest_streak}</span>
           </li>
         `;
       }).join('');
@@ -98,8 +99,8 @@ app.get("/logout", function(req, res) {
 
 app.get("/explore", async function (req, res) {
   res.render("explore", {
-    currStreaks: await dataServicesAuth.bestCurrStreaks(),
-    highStreaks: await dataServicesAuth.bestHighestStreaks()
+    leaderboard: (req.query != undefined && req.query.sort == '0') ? await dataServicesAuth.bestHighestStreaks() : await dataServicesAuth.bestCurrStreaks(),
+    highestSort: req.query.sort=='0'
   });
 });
 
