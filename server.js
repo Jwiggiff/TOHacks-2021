@@ -114,10 +114,6 @@ dataServicesAuth.initialize()
     console.log(err);
 });
 
-function onHttpStart() {
-  console.log("Express http server listening on: " + HTTP_PORT);
-};
-
 app.use(function(req,res){
   res.status(404).send("Page Not Found");
 });

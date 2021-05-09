@@ -64,7 +64,7 @@ module.exports = {
 
     registerUser: function(userData){
         return new Promise((resolve,reject)=>{
-            pool.query(`INSERT INTO data.users VALUES (default, '${userData.f_name}', '${userData.l_name}', '${userData.email}', '${userData.password}', NULL, NULL, NULL, NULL, NULL, NULL, NULL);`, (err, res) => {
+            pool.query(`INSERT INTO data.users VALUES (default, '${userData.fname}', '${userData.lname}', '${userData.email}', '${userData.password}', NULL, NULL, NULL, NULL, NULL, NULL, NULL);`, (err, res) => {
                 if (err) {
                     console.log('Something went wrong. Please ensure the user data was inputted correctly.');
                     console.error(err);
