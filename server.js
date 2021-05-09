@@ -22,7 +22,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  res.locals.sessions = req.session;
+  res.locals.session = req.session;
   next();
 });
 
