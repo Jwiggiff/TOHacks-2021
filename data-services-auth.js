@@ -44,11 +44,54 @@ module.exports = {
                 }
             });
         })
+    },
+    incrementPoints: function(userData){
+        return new Promise((resolve,reject)=> {
 
+            email_address = userData.email;
+            user_points = userData.points + 10;
+            user_level = userData.level;
+
+            if (user_points > 100) {
+                user_points = user_points - 100;
+                user_level = user_level + 1;
+            }
+    
+            console.log(userData)
+            const query = `
+                UPDATE data.users
+                SET points = user_points
+                WHERE email = '${email_address}';
+            `;
+            
+            pool.query(query, (err, res) => {
+                console.log(res);
+                if (err) {
+                    console.log('Something went wrong.');
+                    console.error(err);
+                }
+                resolve("Points have been updated successfully");
+            });
+
+            const query1 = `
+                UPDATE data.users
+                SET level = user_level
+                WHERE email = '${email_address}';
+            `;
+            
+            pool.query(query1, (err, res) => {
+                console.log(res);
+                if (err) {
+                    console.log('Something went wrong.');
+                    console.error(err);
+                }
+                resolve("Level has been updated successfully");
+            });
+        })
     },
     registerUser: function(userData){
         return new Promise((resolve,reject)=>{
-            pool.query(`INSERT INTO data.users VALUES (default, '${userData.fname}', '${userData.lname}', '${userData.email}', '${userData.password}', NULL, NULL, NULL, NULL, NULL, NULL, NULL);`, (err, res) => {
+            pool.query(`INSERT INTO data.users VALUES (default, '${userData.fname}', '${userData.lname}', '${userData.email}', '${userData.password}', NULL, 0, 1, NULL, NULL, NULL, NULL);`, (err, res) => {
                 if (err) {
                     console.log('Something went wrong. Please ensure the user data was inputted correctly.');
                     console.error(err);
@@ -110,34 +153,6 @@ module.exports = {
             if (err) {
                 console.log('Something went wrong. Please ensure valid user email and animal UUID are provided.');
                 console.log(err);
-            }
-        });
-    },
-    bestCurrStreaks: function() {
-        pool.query("SELECT * FROM data.users ORDER BY day_streak_count DESC;", (err, res) => {
-            if (err) {
-                console.log('Something went wrong.');
-                console.log(err);
-            } else {
-                let ans = [];
-                res.rows.forEach((row) => {
-                    ans.push(row);
-                });
-                return ans;
-            }
-        });
-    },
-    bestHighestStreaks: function() {
-        pool.query("SELECT * FROM data.users ORDER BY highest_streak DESC;", (err, res) => {
-            if (err) {
-                console.log('Something went wrong.');
-                console.log(err);
-            } else {
-                let ans = [];
-                res.rows.forEach((row) => {
-                    ans.push(row);
-                });
-                return ans;
             }
         });
     }
