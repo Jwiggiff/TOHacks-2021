@@ -23,6 +23,7 @@
     "client-sessions": "^0.8.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
+    "pg": "^8.6.0",
     "sass": "^1.32.12"
   },
   "devDependencies": {
