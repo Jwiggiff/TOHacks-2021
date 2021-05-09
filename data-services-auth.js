@@ -251,7 +251,6 @@ module.exports = {
                 } else {
                     let ans = [];
                     res.rows.forEach((row) => {
-                        // row.adopt = await this.getAnimalbyID(row.adopt);
                         ans.push(row);
                     });
                     resolve(ans);
@@ -268,7 +267,6 @@ module.exports = {
                 } else {
                     let ans = [];
                     res.rows.forEach((row) => {
-                        // row.adopt = await this.getAnimalbyID(row.adopt);
                         ans.push(row);
                     });
                     resolve(ans);
