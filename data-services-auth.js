@@ -139,6 +139,7 @@ module.exports = {
                 resolve("user has been added correctly");
             });
             assignAnimal(userData.email, userData.type);
+            assignHabit(userData.email, userData.habit);
         })
     },
     //return list of animal objects of a certain type: dog, cat, bug, fish
@@ -222,6 +223,23 @@ module.exports = {
             console.log('Something went wrong.');
         }
     },
+    assignHabit: function(email, habit) {
+        if (habit==='Exercise') {
+            pool.query(`UDPATE data.users SET habit_id='0538881f-a203-403b-99a5-1fc1faf52cab' WHERE email='${email}';`, (err,res) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        } else if (habit==='Study') {
+            pool.query(`UDPATE data.users SET habit_id='cf40e6a6-6ad8-4aa6-88c3-c0245fbe7cc6' WHERE email='${email}';`, (err,res) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        } else {
+            console.log('Something went wrong.');
+        }
+    }
     bestCurrStreaks: function() {
         return new Promise((resolve,reject) => {
             pool.query("SELECT * FROM data.users ORDER BY day_streak_count DESC;", (err, res) => {
