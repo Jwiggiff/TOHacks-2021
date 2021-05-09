@@ -87,6 +87,13 @@ module.exports = {
                 }
                 resolve("Level has been updated successfully");
             });
+
+            pool.query('UPDATE data.users SET last_clicked=CURRENT_TIMESTAMP WHERE email=email_address;', (err, res) => {
+                if (err) {
+                    console.log('Something went wrong.');
+                    console.log(err);
+                }
+            });
         })
     },
     registerUser: function(userData){
