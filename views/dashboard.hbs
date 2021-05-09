@@ -11,7 +11,7 @@
     </div>
     <div class="card">
       <div class="card__title">Challenges Completed</div>
-      <div class="card__stat">{{pointsToChallenges session.user.points}}</div>
+      <div class="card__stat">{{pointsToChallenges session.user.points session.user.level}}</div>
     </div>
     <div class="card">
       <div class="card__title">Level</div>
@@ -22,7 +22,16 @@
     <span class="progress"></span>
   </div>
   <div class="btn-container">
-    <a href="#" class="btn">I Did My Task!</a>
+    <form method="post" action="/increment">
+      <button class="btn">I Did My Task!</button>
+    </form>
     <a href="/rewards">View Rewards</a>
   </div>
 </section>
+
+{{status}}
+{{#if noThanks}}
+  <script>
+    alert("Task already completed for today!");
+  </script>
+{{/if}}

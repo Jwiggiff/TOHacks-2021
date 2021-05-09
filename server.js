@@ -12,11 +12,11 @@ app.engine(".hbs", exphbs({
   extname: ".hbs",
   defaultLayout: "default",
   helpers: {
-    pointsToChallenges: (points) => {
-      return Math.floor(points / 50);
+    pointsToChallenges: (points, level) => {
+      return Math.floor((parseInt(points) + (parseInt(level) - 1) * 100) / 50);
     },
     pointsToPercentage: (points) => {
-      return (points % 100);
+      return (points / 100) * 100;
     }
   }
 }));
@@ -32,7 +32,6 @@ app.use(
 );
 
 app.use(async function (req, res, next) {
-  console.log(req.session)
   if(req.session.user)
     res.locals.session = {
       user: await dataServicesAuth.getUser(req.session.user.email),
@@ -65,7 +64,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/dashboard", ensureLogin, function (req, res) {
-  res.render("dashboard");
+  res.render("dashboard", {noThanks: req.session.noThanks});
+  req.session.noThanks = false;
 });
 
 app.get("/login", ensureLoggedOut, function (req, res) {
@@ -115,7 +115,25 @@ app.post("/login", function(req,res) {
   .catch((e) => {
     res.render('login', { errorMsg: e})
   })
-})
+});
+
+app.post("/increment", async function (req, res) {
+  let last_clicked = (await dataServicesAuth.getUser(req.session.user.email)).last_clicked;
+  let yesterday = new Date(new Date().toISOString().split('T')[0]);
+  yesterday.setDate(yesterday.getDate()-1);
+
+  if(last_clicked == null) {
+    dataServicesAuth.incrementPoints(res.locals.session.user);
+  } else {
+    last_clicked = new Date(last_clicked.toISOString().split('T')[0]);    
+    if(last_clicked.getTime() == yesterday.getTime()) {
+      dataServicesAuth.incrementPoints(res.locals.session.user);
+    } else {
+      req.session.noThanks = true;
+    }
+    res.redirect("/dashboard");
+  }
+});
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const user = {

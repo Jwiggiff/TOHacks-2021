@@ -49,8 +49,10 @@ module.exports = {
         return new Promise((resolve,reject)=> {
 
             email_address = userData.email;
-            user_points = userData.points + 10;
-            user_level = userData.level;
+            user_points = parseInt(userData.points) + 10;
+            user_level = parseInt(userData.level);
+            day_streak_count = parseInt(userData.day_streak_count) + 1;
+            highest_streak = parseInt(userData.highest_streak);
 
             if (user_points > 100) {
                 user_points = user_points - 100;
@@ -60,14 +62,14 @@ module.exports = {
             // console.log(userData)
             const query = `
                 UPDATE data.users
-                SET points = user_points
+                SET points = '${user_points}'
                 WHERE email = '${email_address}';
             `;
             
             pool.query(query, (err, res) => {
                 // console.log(res);
                 if (err) {
-                    console.log('Something went wrong.');
+                    console.log('ASomething went wrong.');
                     console.error(err);
                 }
                 resolve("Points have been updated successfully");
@@ -75,22 +77,53 @@ module.exports = {
 
             const query1 = `
                 UPDATE data.users
-                SET level = user_level
+                SET level = '${user_level}'
                 WHERE email = '${email_address}';
             `;
             
             pool.query(query1, (err, res) => {
                 // console.log(res);
                 if (err) {
-                    console.log('Something went wrong.');
+                    console.log('BSomething went wrong.');
                     console.error(err);
                 }
                 resolve("Level has been updated successfully");
             });
 
-            pool.query('UPDATE data.users SET last_clicked=CURRENT_TIMESTAMP WHERE email=email_address;', (err, res) => {
+            const query2 = `
+                UPDATE data.users
+                SET day_streak_count = '${day_streak_count}'
+                WHERE email = '${email_address}';
+            `;
+
+            pool.query(query2, (err, res) => {
+                // console.log(res);
                 if (err) {
-                    console.log('Something went wrong.');
+                    console.log('CSomething went wrong.');
+                    console.error(err);
+                }
+                resolve("Streak has been updated successfully");
+            });
+
+            if(day_streak_count > highest_streak) {
+                const query3 = `
+                    UPDATE data.users
+                    SET highest_streak = '${day_streak_count}'
+                    WHERE email = '${email_address}';
+                `;
+                pool.query(query3, (err, res) => {
+                    // console.log(res);
+                    if (err) {
+                        console.log('DSomething went wrong.');
+                        console.error(err);
+                    }
+                    resolve("Highest streak has been updated successfully");
+                });
+            }
+
+            pool.query(`UPDATE data.users SET last_clicked=CURRENT_TIMESTAMP WHERE email='${email_address}';`, (err, res) => {
+                if (err) {
+                    console.log('ESomething went wrong.');
                     console.log(err);
                 }
             });
