@@ -22,7 +22,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  res.locals.sessions = req.session;
+  res.locals.session = req.session;
   next();
 });
 
@@ -46,7 +46,9 @@ app.get("/dashboard", ensureLogin, function (req, res) {
 });
 
 app.get("/login", function (req, res) {
-  res.render("login");
+  res.render("login", {
+    email: req.query.email
+  });
 });
 app.get("/register", function (req, res) {
   res.render("register");

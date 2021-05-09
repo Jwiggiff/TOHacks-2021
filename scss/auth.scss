@@ -6,6 +6,10 @@
     text-align: center;
     margin: 1.5em 0 3em 0;
   }
+
+  .btn {
+    font-size: 1.5em;
+  }
 }
 
 .register {
@@ -44,6 +48,38 @@
     font-size: 2.5em;
     text-align: center;
     margin-bottom: 1.5em;
+  }
+
+  .selection {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2rem;
+    padding: 0 12rem;
+
+    img {
+      width: 100%;
+    }
+
+    .btn {
+      flex: 1;
+      font-size: 1.5em;
+      font-weight: bold;
+      padding-bottom: 2rem;
+      max-width: 300px;
+      text-align: center;
+    }
+  }
+
+  #done .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+    padding: 2rem;
   }
 }
 
