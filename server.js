@@ -87,9 +87,19 @@ app.get("/settings", function (req, res) {
 
 app.post("/register", function(req, res) {
   dataServicesAuth.registerUser(req.body)
-  .then(() => res.render('register', { successMsg: "User created!"}))
+  .then(() => res.render('login', { errorMsg: "User created!"}))
   .catch((err) => res.render('register', { errorMsg: err, userName: req.body.userName }));
 });
+
+app.post("/login", function(req,res) {
+  dataServicesAuth.checkUser(req.body)
+  .then(function(user){
+    req.session.user ={
+      email: user.email
+    }
+    res.redirect('/dashboard');
+  })
+})
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const user = {

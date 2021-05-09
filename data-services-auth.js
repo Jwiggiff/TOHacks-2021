@@ -20,34 +20,31 @@ module.exports = {
         })
     },
     checkUser: function(userData){
-        var user_exists = false;
+        return new Promise((resolve,reject)=> {
 
-        email_address = userData[email];
-        user_password = userData[password];
+            email_address = userData.email;
+            user_password = userData.password;
+    
+            console.log(userData)
+            const query = `
+                SELECT email, password
+                FROM data.users
+                WHERE email = '${email_address}' AND password = '${user_password}';
+            `;
+            
+            pool.query(query, (err, res) => {
+                console.log(res);
+                if (err) {
+                    reject(err);
+                }
+                if (res.rowCount = 1) {
+                    resolve('Successfully authenticated');
+                } else {
+                    resolve('Invalid email or password');
+                }
+            });
+        })
 
-        const query = `
-            SELECT email, password
-            FROM data.users
-            WHERE email = ${email_address} AND password = ${user_password};
-        `;
-        
-        pool.query(query, (err, res) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-
-            if (res.length > 0) {
-                user_exists = true;
-                console.log('Successfully authenticated')
-            } else {
-                console.log('Invalid email or password')
-            }
-
-            pool.end();
-        });
-        
-        return user_exists;
     },
     registerUser: function(userData){
         return new Promise((resolve,reject)=>{
@@ -56,9 +53,8 @@ module.exports = {
                     console.log('Something went wrong. Please ensure the user data was inputted correctly.');
                     console.error(err);
                 }
-                pool.end();
+                resolve("user has been added correctly");
             })
-            resolve("user has been added correctly");
         })
     },
     //return list of animal objects of a certain type: dog, cat, bug, fish
