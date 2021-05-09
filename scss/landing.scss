@@ -59,4 +59,20 @@
       margin: -0.5rem;
     }
   }
+
+  .stats {
+    margin-top: 2rem;
+    list-style: none;
+    display: flex;
+    gap: 5rem;
+
+    h3 {
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    li:nth-child(2) h3 {
+      color: darken($yellow, 25%);
+    }
+  }
 }

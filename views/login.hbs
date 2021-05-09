@@ -1,10 +1,10 @@
 <div class="login">
   <h1>Enter Your Info</h1>
   <form method="post" action="/login" id="loginForm">
-    <input type="text" name="email" placeholder="Email">
+    <input type="text" name="email" placeholder="Email" value="{{email}}">
     <input type="password" name="password" placeholder="Password">
     {{#if errorMsg}}
-        <div class="alert alert-danger"><strong>Error:</strong> {{errorMsg}}</div>
+        <div class="errormsg"><strong>Error:</strong> {{errorMsg}}</div>
     {{/if}}
     <button class="btn">Login</button>
 
