@@ -239,7 +239,7 @@ module.exports = {
         } else {
             console.log('Something went wrong.');
         }
-    }
+    },
     bestCurrStreaks: function() {
         return new Promise((resolve,reject) => {
             pool.query("SELECT * FROM data.users ORDER BY day_streak_count DESC;", (err, res) => {
