@@ -101,7 +101,7 @@ app.get("/settings", function (req, res) {
 app.post("/register", function(req, res) {
   dataServicesAuth.registerUser(req.body)
   .then(() => res.render('login', { Msg: "User created!"}))
-  .catch((err) => res.render('register', { errorMsg: err, userName: req.body.userName }));
+  .catch((err) => res.render('register', { errorMsg: err}));
 });
 
 app.post("/login", function(req,res) {
@@ -111,6 +111,9 @@ app.post("/login", function(req,res) {
       email: user.email
     }
     res.redirect('/dashboard');
+  })
+  .catch((e) => {
+    res.render('login', { errorMsg: e})
   })
 })
 

@@ -37,10 +37,10 @@ module.exports = {
                 if (err) {
                     reject(err);
                 }
-                if (res.rowCount == 1) {
+                if (res.rowCount > 0) {
                     resolve(res.rows[0]);
                 } else {
-                    resolve('Invalid email or password');
+                    reject('Invalid email or password');
                 }
             });
         })
