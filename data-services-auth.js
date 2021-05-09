@@ -138,8 +138,8 @@ module.exports = {
                 }
                 resolve("user has been added correctly");
             });
-            assignAnimal(userData.email, userData.type);
-            assignHabit(userData.email, userData.habit);
+            this.assignAnimal(userData.email, userData.type);
+            this.assignHabit(userData.email, userData.habit);
         })
     },
     //return list of animal objects of a certain type: dog, cat, bug, fish
@@ -191,28 +191,29 @@ module.exports = {
     },
     //TODO: make a function for assign an adopter to an animal and assigning pet to human
     assignAnimal: function(email, type) {
-        if (type==='dog') {
+        if (type=='dog') {
+            console.log('dog');
             pool.query(`UPDATE data.users SET adopt='0dd2d896-f315-4ca2-8a7d-0ca0e99fa2ee' WHERE email='${email}';`, (err, res) => {
                 if (err) {
                     console.log('Something went wrong. Please ensure a valid user email is provided.');
                     console.log(err);
                 }
             });
-        } else if (type==='cat') {
+        } else if (type=='cat') {
             pool.query(`UPDATE data.users SET adopt='2f0db17e-1a50-4854-9430-1d3bcfb7873d' WHERE email='${email}';`, (err, res) => {
                 if (err) {
                     console.log('Something went wrong. Please ensure a valid user email is provided.');
                     console.log(err);
                 }
             });
-        } else if (type==='fish') {
+        } else if (type=='fish') {
             pool.query(`UPDATE data.users SET adopt='0248d9b6-9b3f-440f-acf0-710752f199d8' WHERE email='${email}';`, (err, res) => {
                 if (err) {
                     console.log('Something went wrong. Please ensure a valid user email is provided.');
                     console.log(err);
                 }
             });
-        } else if (type==='bug') {
+        } else if (type=='bug') {
             pool.query(`UPDATE data.users SET adopt='738ee61c-bd96-4b9f-a6e3-420fc1a1bc0d' WHERE email='${email}';`, (err, res) => {
                 if (err) {
                     console.log('Something went wrong. Please ensure a valid user email is provided.');
@@ -225,13 +226,13 @@ module.exports = {
     },
     assignHabit: function(email, habit) {
         if (habit==='Exercise') {
-            pool.query(`UDPATE data.users SET habit_id='0538881f-a203-403b-99a5-1fc1faf52cab' WHERE email='${email}';`, (err,res) => {
+            pool.query(`UPDATE data.users SET habit_id='0538881f-a203-403b-99a5-1fc1faf52cab' WHERE email='${email}';`, (err,res) => {
                 if (err) {
                     console.log(err);
                 }
             });
         } else if (habit==='Study') {
-            pool.query(`UDPATE data.users SET habit_id='cf40e6a6-6ad8-4aa6-88c3-c0245fbe7cc6' WHERE email='${email}';`, (err,res) => {
+            pool.query(`UPDATE data.users SET habit_id='cf40e6a6-6ad8-4aa6-88c3-c0245fbe7cc6' WHERE email='${email}';`, (err,res) => {
                 if (err) {
                     console.log(err);
                 }

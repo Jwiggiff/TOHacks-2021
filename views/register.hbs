@@ -19,6 +19,7 @@
     </div>
     <h1>Which Animal Would You Like to Raise?</h1>
     <div class="selection">
+      <input name="type" type="hidden">
       <a href="#3" class="btn btn-card">
         <img src="/assets/fish.png" alt="Fish">
         Fish
@@ -45,9 +46,10 @@
     </div>
     <h1>What Activity Do You Need Motivation For?</h1>
     <div class="selection">
+      <input name="habit" type="hidden">
       <a href="#done" class="btn btn-card">
         <img src="/assets/workout.png" alt="Workout">
-        Workout
+        Exercise
       </a>
       <a href="#done" class="btn btn-card">
         <img src="/assets/study.png" alt="Studying">
@@ -65,3 +67,16 @@
     <button class="btn">Sign Up!</button>
   </section>
 </form>
+
+<script>
+  document.querySelectorAll("[id='2'] .selection .btn.btn-card").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      document.querySelector("input[name='type']").value = btn.innerText.toLowerCase().trim();
+    });
+  });
+  document.querySelectorAll("[id='3'] .selection .btn.btn-card").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      document.querySelector("input[name='habit']").value = btn.innerText.trim();
+    });
+  });
+</script>

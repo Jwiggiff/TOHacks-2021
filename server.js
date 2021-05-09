@@ -120,9 +120,13 @@ app.get("/interact", function (req, res) {
 // POST Methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post("/register", function(req, res) {
+  console.log(req.body);
   dataServicesAuth.registerUser(req.body)
   .then(() => res.render('login', { Msg: "User created!"}))
-  .catch((err) => res.render('register', { errorMsg: err}));
+  .catch((err) => {
+    console.error(err);
+    res.render('register', { errorMsg: err})
+  });
 });
 
 app.post("/login", function(req,res) {
