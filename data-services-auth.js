@@ -25,7 +25,7 @@ module.exports = {
             email_address = userData.email;
             user_password = userData.password;
     
-            console.log(userData)
+            // console.log(userData)
             const query = `
                 SELECT email, password
                 FROM data.users
@@ -33,7 +33,7 @@ module.exports = {
             `;
             
             pool.query(query, (err, res) => {
-                console.log(res);
+                // console.log(res);
                 if (err) {
                     reject(err);
                 }
@@ -57,7 +57,7 @@ module.exports = {
                 user_level = user_level + 1;
             }
     
-            console.log(userData)
+            // console.log(userData)
             const query = `
                 UPDATE data.users
                 SET points = user_points
@@ -65,7 +65,7 @@ module.exports = {
             `;
             
             pool.query(query, (err, res) => {
-                console.log(res);
+                // console.log(res);
                 if (err) {
                     console.log('Something went wrong.');
                     console.error(err);
@@ -80,7 +80,7 @@ module.exports = {
             `;
             
             pool.query(query1, (err, res) => {
-                console.log(res);
+                // console.log(res);
                 if (err) {
                     console.log('Something went wrong.');
                     console.error(err);
