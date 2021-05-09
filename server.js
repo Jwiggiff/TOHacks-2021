@@ -62,6 +62,10 @@ app.get("/explore", function(req, res) {
   res.render("explore");
 });
 
+app.get("/settings", function(req, res) {
+  res.render("settings");
+});
+
 //login test hardcoded
 
 const user = {
