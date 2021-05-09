@@ -129,7 +129,7 @@ module.exports = {
             });
         })
     },
-    registerUser: function(userData, type){
+    registerUser: function(userData){
         return new Promise((resolve,reject)=>{
             pool.query(`INSERT INTO data.users VALUES (default, '${userData.fname}', '${userData.lname}', '${userData.email}', '${userData.password}', 0, 0, 1, NULL, NULL, NULL, 0, NULL);`, (err, res) => {
                 if (err) {
@@ -138,7 +138,7 @@ module.exports = {
                 }
                 resolve("user has been added correctly");
             });
-            assignAnimal(userData.email, type);
+            assignAnimal(userData.email, userData.type);
         })
     },
     //return list of animal objects of a certain type: dog, cat, bug, fish
