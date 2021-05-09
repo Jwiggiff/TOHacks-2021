@@ -22,6 +22,7 @@
     padding: 0 1rem;
     text-align: center;
     color: $white;
+    transition: color 0.2s ease;
 
     + .nav-link {
       margin-left: 2rem;
@@ -40,8 +41,12 @@
       transition: width 0.2s ease;
     }
 
-    &:hover::before {
-      width: 100%;
+    &:hover {
+      color: $black;
+
+      &::before {
+        width: 100%;
+      }
     }
   }
 }

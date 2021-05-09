@@ -1,0 +1,84 @@
+.dashboard {
+  height: 100%;
+  padding: 4rem 8rem;
+  display: flex;
+  flex-flow: column;
+
+  .cards {
+    display: flex;
+    gap: 2rem;
+
+    .card {
+      flex: 1;
+      padding: 1rem 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      font-weight: bold;
+
+      &__title {
+        color: lighten($black, 25%);
+      }
+      &__stat {
+        font-size: 2.5em;
+      }
+    }
+  }
+
+  .progress-bar {
+    margin: 2rem 1rem;
+    height: 20px;
+    background-color: lighten($black, 60%);
+    border-radius: 10px;
+    position: relative;
+    --percentage: 66%;
+
+    .progress {
+      display: block;
+      border-radius: inherit;
+      width: var(--percentage);
+      height: 100%;
+      background-color: $red;
+      transition: width 0.2s ease;
+    }
+
+    &::before {
+      content: "Level 10";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      transform: translateX(-50%);
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+
+    &::after {
+      content: "Level 11";
+      position: absolute;
+      top: 100%;
+      right: 0;
+      transform: translateX(50%);
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+  }
+
+  .btn-container {
+    height: 100%;
+    display: grid;
+    place-items: center;
+
+    .btn {
+      padding: 4rem 8rem;
+      display: grid;
+      place-items: center;
+      font-size: 4em;
+      font-weight: bold;
+    }
+  }
+}
