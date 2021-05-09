@@ -78,17 +78,20 @@ module.exports = {
     },
     //return user object given email
     getUser: function(email) {
-        pool.query(`SELECT * FROM data.users WHERE email='${email}';`, (err, res) => {
-            if (err) {
-                console.log ('Something went wrong. Please ensure a valid email is provided.');
-                console.log (err);
-            } else {
-                let ans;
-                res.rows.forEach((row) => {
-                    ans = row;
-                });
-                return ans;
-            }
+        return new Promise((resolve, reject) => {
+            pool.query(`SELECT * FROM data.users WHERE email='${email}';`, (err, res) => {
+                if (err) {
+                    console.log ('Something went wrong. Please ensure a valid email is provided.');
+                    console.log (err);
+                } else {
+                    let ans;
+                    res.rows.forEach((row) => {
+                        ans = row;
+                    });
+                    // return ans;
+                    resolve(ans);
+                }
+            });
         });
     },
     getAnimalbyID: function(id) {
