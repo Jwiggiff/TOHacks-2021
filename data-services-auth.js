@@ -1,25 +1,29 @@
 //set up schemas here
 
+const e = require("express");
+
 // need these functions. Note: use promises to resolve() and reject() when returning.
+
+let pool;
 module.exports = {
     initialize: function(){
         //initializing functions. e.g. create connection, create model etc.
+        return new Promise((resolve,reject) => {
+            const { Pool } = require("pg");
 
-        const { Pool } = require("pg");
-
-        const config = {
-            user: "om",
-            password: "TnMfK5w8C9tnMb6L",
-            host: "free-tier5.gcp-europe-west1.cockroachlabs.cloud",
-            database: "lumpy-orca-283.data",
-            port: 26257,
-            ssl: {
-              rejectUnauthorized: false,
-            }
-        };
-
-        const pool = new Pool(config);
-
+            const config = {
+                user: "om",
+                password: "TnMfK5w8C9tnMb6L",
+                host: "free-tier5.gcp-europe-west1.cockroachlabs.cloud",
+                database: "lumpy-orca-283.data",
+                port: 26257,
+                ssl: {
+                  rejectUnauthorized: false,
+                }
+            };
+            pool = new Pool(config);
+            resolve("database connected");
+        })
     },
 
     checkUser: function(userData){
@@ -59,24 +63,16 @@ module.exports = {
     },
 
     registerUser: function(userData){
-        // passed in a user object with all the properties in your schema, just put this person into your database. oh, but also check if there's already a person.
-
-        // var data = ['Krish', 'Chopra', '15', 'krish.chopra23@gmail.com', 'hello123'];
-        // `INSERT INTO data.users (fname, lname, age, email, password) VALUES ('${data[0]}', '${data[1]}', ${data[2]}, '${data[3]}', '${data[4]}');`
-
-        const query = `
-            INSERT INTO data.users (fname, lname, age, email, password, day_streak_count, points, level) VALUES ('${userData[fname]}', '${userData[lname]}', ${userData[age]}, '${userData[email]}', '${userData[password]}', ${userData[day_streak_count]}, ${userData[points]}, '${userData[level]}')
-        `;
-
-        pool.query(query, (err, res) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            console.log('Data insert successful');
-            pool.end();
-        });
-
+        return new Promise((resolve,reject)=>{
+            pool.query(`INSERT INTO data.users VALUES (default, '${userData.f_name}', '${userData.l_name}', '${userData.email}', '${userData.password}', NULL, NULL, NULL, NULL, NULL, NULL, NULL);`, (err, res) => {
+                if (err) {
+                    console.log('Something went wrong. Please ensure the user data was inputted correctly.');
+                    console.error(err);
+                }
+                pool.end();
+            })
+            resolve("user has been added correctly");
+        })
     }
 
 }

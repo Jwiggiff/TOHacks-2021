@@ -3,8 +3,8 @@ const app = express();
 var path = require("path");
 var dataServicesAuth = require("./data-services-auth")
 var dataService = require("./data-service")
-app.use(express.urlencoded({ extended: false }));
-
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const exphbs = require("express-handlebars");
 const sessions = require("client-sessions");
@@ -50,16 +50,28 @@ app.get("/login", function (req, res) {
     email: req.query.email
   });
 });
+
+
+
 app.get("/register", function (req, res) {
   res.render("register");
 });
+
 app.get("/logout", function(req, res) {
   req.session.reset();
   res.redirect('/');
 });
 
-//login test hardcoded
 
+// POST Methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post("/register", function(req, res) {
+  dataServicesAuth.registerUser(req.body)
+  .then(() => res.render('register', { successMsg: "User created!"}))
+  .catch((err) => res.render('register', { errorMsg: err, userName: req.body.userName }));
+});
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const user = {
   username: "sampleuser",
   password: "samplepassword",
@@ -93,8 +105,14 @@ app.post("/login", (req, res) => {
 // initialize ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 app.use(express.static("public"));
 
-
-app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+dataServicesAuth.initialize()
+.then(function(msg) {
+    console.log(msg);
+    app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+})
+.catch(function(err) {
+    console.log(err);
+});
 
 function onHttpStart() {
   console.log("Express http server listening on: " + HTTP_PORT);
